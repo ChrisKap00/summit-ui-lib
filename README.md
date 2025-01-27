@@ -1,1 +1,1 @@
-# -summit-ui-lib
+# @summit-ui/lib
