@@ -26,7 +26,7 @@ export default [
       typescript({ tsconfig: "./tsconfig.json" }),
       terser(),
     ],
-    external: ["react", "react-dom"],
+    external: ["react", "react-dom", "react/jsx-runtime"],
   },
   {
     input: "src/index.ts",

@@ -8,22 +8,36 @@ interface TextAreaProps {
   theme?: string;
   hoverBg?: string;
   style?: object;
+  value?: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
+function randomString(length: number, chars: string) {
+  let result = "";
+  for (let i = length; i > 0; --i)
+    result += chars[Math.floor(Math.random() * chars.length)];
+  return result;
+}
+
 export const TextArea = ({
-  autoResize,
+  autoResize = true,
   placeholder,
-  minRows,
+  minRows = 1,
   autoFocus,
   theme,
   hoverBg,
   style,
+  value,
   onChange,
 }: TextAreaProps) => {
+  const randomClassName = randomString(
+    20,
+    "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  );
+
   return (
     <textarea
-      className="summit-textarea-autoresize"
+      className={`summit-textarea-autoresize-${randomClassName}`}
       style={{
         border: "none",
         fontFamily: "inherit",
@@ -44,22 +58,26 @@ export const TextArea = ({
       }}
       role="textbox"
       autoFocus={autoFocus}
-      placeholder={placeholder || "Placeholder"}
-      rows={(minRows || 0) < 1 ? 1 : minRows}
-      onChange={
-        autoResize
-          ? (e) => {
-              e.target.style.height = `calc(${(minRows || 1) * 18}px + 1rem)`;
-              e.target.style.height = `${
-                document.querySelector(".summit-textarea-autoresize")
-                  ? document.querySelector(".summit-textarea-autoresize")
-                      ?.scrollHeight
-                  : `calc(${(minRows || 1) * 18}px`
-              }px`;
-              onChange?.(e);
-            }
-          : undefined
-      }
+      placeholder={placeholder}
+      rows={minRows < 1 ? 1 : minRows}
+      value={value}
+      onChange={(e) => {
+        if (autoResize) {
+          e.target.style.height = `calc(${minRows * 18}px + 1rem)`;
+          e.target.style.height = `${
+            document.querySelector(
+              `.summit-textarea-autoresize-${randomClassName}`
+            )
+              ? document.querySelector(
+                  `.summit-textarea-autoresize-${randomClassName}`
+                )?.scrollHeight
+              : `calc(${minRows * 18})px`
+          }px`;
+        }
+        if (onChange) {
+          onChange(e);
+        }
+      }}
       onMouseOver={(e) => {
         e.currentTarget.style.backgroundColor =
           theme === "dark"

@@ -9,8 +9,9 @@ interface TextAreaProps {
     theme?: string;
     hoverBg?: string;
     style?: object;
+    value?: string;
     onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
-declare const TextArea: ({ autoResize, placeholder, minRows, autoFocus, theme, hoverBg, style, onChange, }: TextAreaProps) => react_jsx_runtime.JSX.Element;
+declare const TextArea: ({ autoResize, placeholder, minRows, autoFocus, theme, hoverBg, style, value, onChange, }: TextAreaProps) => react_jsx_runtime.JSX.Element;
 
 export { TextArea };

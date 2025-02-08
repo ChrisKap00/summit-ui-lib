@@ -1,12 +1,13 @@
 {
   "name": "@summit-ui/lib",
-  "version": "1.0.0",
+  "version": "1.0.16",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "rollup": "rollup -c --bundleConfigAsCjs"
+    "rollup": "rollup -c --bundleConfigAsCjs",
+    "storybook": "sb dev -p 6006"
   },
   "author": "Christos Kapotos",
   "license": "MIT",
